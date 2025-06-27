@@ -26,8 +26,8 @@ export default function Home() {
     [0, 1],
   ];
 
-  const clickHandler = () => {
-    const newBoard = structuredClone(board);
+  const resetButton = () => {
+    const newBoard = structuredClone(originBoard);
     const boardHeight = newBoard.length;
     const boardWidth = newBoard[0].length;
 
@@ -47,7 +47,7 @@ export default function Home() {
 
     const actions = [doNothing, extendWall];
 
-    board.forEach((row, y) => {
+    originBoard.forEach((row, y) => {
       row.forEach((cell, x) => {
         actions[cell](y, x);
       });
@@ -58,14 +58,16 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.button} onClick={clickHandler} />
+      <div className={styles.button} onClick={resetButton}>
+        迷路生成
+      </div>
       <div className={styles.board}>
         {board.map((row, y) =>
           row.map((color, x) => (
             <div
               className={styles.cell}
               key={`${x}-${y}`}
-              style={{ background: color === 1 ? `#000` : `#0ff` }}
+              style={{ background: color === 1 ? `#000` : `#888` }}
             />
           )),
         )}
